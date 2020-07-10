@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TODO list & exchange calculator</title>
+    <style>
+        p {
+            font-size: 18px;
+            color: white;
+        }
+        #сontainer {
+            padding: 15px;
+            background: gray;
+            text-align: center;
+            margin: 0 auto;
+            width: 370px;
+        }
+
+        input[type = 'text'], input[type = 'button'] {
+            width: 150px;
+            height: 30px;
+            border: 2px solid black;
+            padding: 5px;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .exchange {
+            display: flex;
+            height: 30px;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div id="сontainer">
+    <h1>Валютный Калькулятор</h1>
+    <form action="#">
+        <input type="text" id = "summa" value="" placeholder="Введите сумму">
+        <div class="exchange">
+            <p>Продажа валюты</p>
+            <input type="radio" name="exchange" id='saleMooney'>
+        </div>
+        <div class="exchange">
+            <p>Покупка валюты</p>
+            <input type="radio" name="exchange" id='buyMooney'>
+        </div>
+        <div>
+            <p>Выбор валюты</p>
+            <select id="selectMooney">
+                <option value="usd">USD</option>
+                <option value="euro">EUR</option>
+                <option value="rub">RUB</option>
+            </select>
+        </div>
+        <input type="button" id="calculate" value="Посчитать">
+        <div>
+            <p id="result">Результат:</p>
+        </div>
+    </form>
+</div>
+    <script>
+        const BuyDollar = 28.9;
+        const SaleDollar = 28.5;
+        const BuyEuro = 33.5;
+        const SaleEuro = 33;
+        const SaleRub = 0.49;
+        const BuyRub = 0.50;
+        var $summa = document.querySelector('#summa');
+        var $result = document.querySelector('#result');
+        document.querySelector('#calculate').addEventListener('click', function () {
+            var selector = document.getElementById('selectMooney').options.selectedIndex;
+            var value = document.getElementById('selectMooney').options[selector].value;
+            var valueSumma = $summa.value;
+            if (document.querySelector('#saleMooney').checked && value === 'usd') {
+                valueSumma *= SaleDollar;
+            } else if (document.querySelector('#buyMooney').checked && value === 'usd') {
+                valueSumma /= BuyDollar;
+            } else if (document.querySelector('#saleMooney').checked && value === 'euro') {
+                valueSumma *= SaleEuro;
+            } else if (document.querySelector('#buyMooney').checked && value === 'euro') {
+                valueSumma /= BuyEuro;
+            } else if (document.querySelector('#saleMooney').checked && value === 'rub') {
+                valueSumma *= SaleRub;
+            } else if (document.querySelector('#buyMooney').checked && value === 'rub') {
+                valueSumma /= BuyRub;
+            }
+            $result.textContent = 'Результат:' + valueSumma;
+         });
+    </script>
+</body>
+</html>
